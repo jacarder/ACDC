@@ -1,0 +1,18 @@
+---
+import { type QueryParams } from "sanity";
+import type { Author } from "../../studio/sanity.types";
+import { loadQuery } from "../shared/load-query";
+
+const { authorRef, authoredDate } = Astro.props;
+
+const params = { authorRef };
+
+const { data: author } = await loadQuery<Author>({
+	query: `*[_type == "author" && _id == $authorRef][0]`,
+	params,
+});
+---
+
+<div>
+	Posted by {author.name} on {authoredDate}
+</div>

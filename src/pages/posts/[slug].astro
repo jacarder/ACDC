@@ -1,0 +1,41 @@
+---
+import type { SanityDocument } from "@sanity/client";
+import { loadQuery } from "../../shared/load-query";
+import type { Author, Post } from "../../../studio/sanity.types";
+import PortableText from "../../components/PortableText.astro";
+import PostAuthor from "../../components/PostAuthor.astro";
+import buildImageUrl from "../../shared/build-image-url";
+
+export async function getStaticPaths() {
+	const { data: posts } = await loadQuery<SanityDocument[]>({
+		query: `*[_type == "post"]`,
+	});
+
+	return posts.map(({ slug }) => {
+		return {
+			params: {
+				slug: slug?.current,
+			},
+		};
+	});
+}
+
+const { params } = Astro;
+
+const { data: post } = await loadQuery<Post>({
+	query: `*[_type == "post" && slug.current == $slug][0]`,
+	params,
+});
+
+// const { data: author } = await loadQuery<Author>({
+// 	query: `*[_type == "author"][0]`,
+// 	params,
+// });
+const createdDate = new Date(post._createdAt).toDateString();
+console.log(post);
+---
+
+<h1>{post.title}</h1>
+<img src={buildImageUrl(post.mainImage).url()} />
+<PostAuthor authorRef={post.author?._ref} authoredDate={createdDate} />
+<PortableText portableText={post.body} />
