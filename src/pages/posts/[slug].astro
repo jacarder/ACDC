@@ -27,10 +27,6 @@ const { data: post } = await loadQuery<Post>({
 	params,
 });
 
-// const { data: author } = await loadQuery<Author>({
-// 	query: `*[_type == "author"][0]`,
-// 	params,
-// });
 const createdDate = new Date(post._createdAt).toDateString();
 console.log(post);
 ---
