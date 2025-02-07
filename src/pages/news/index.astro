@@ -11,18 +11,12 @@ const { data: posts } = await loadQuery<Post[]>({
 	}`,
 });
 //	TODO add to global variables per environment
-const baseUrl = `http://localhost:4321/posts/`;
+const baseUrl = `http://localhost:4321/news/`;
 ---
 
 <Layout>
-	<div class="shadow-md">
-		<h1>News from our front</h1>
-		{
-			posts.map((x) => (
-				<a href={`${baseUrl}${x.slug?.current}`}>{x.title}</a>
-			))
-		}
-	</div>
+	<h1>News from our front</h1>
+	{posts.map((x) => <a href={`${baseUrl}${x.slug?.current}`}>{x.title}</a>)}
 </Layout>
 
 <style>
