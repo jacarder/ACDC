@@ -2,6 +2,7 @@
 import "../../styles/global.css";
 import { loadQuery } from "../../shared/load-query";
 import type { Post } from "../../../studio/sanity.types";
+import Layout from "../../layouts/Layout.astro";
 
 const { data: posts } = await loadQuery<Post[]>({
 	query: `*[_type == "post"]{
@@ -13,21 +14,20 @@ const { data: posts } = await loadQuery<Post[]>({
 const baseUrl = `http://localhost:4321/posts/`;
 ---
 
-<div class="post-list-container">
-	<h1>News from our front</h1>
-	{posts.map((x) => <a href={`${baseUrl}${x.slug?.current}`}>{x.title}</a>)}
-</div>
+<Layout>
+	<div class="shadow-md">
+		<h1>News from our front</h1>
+		{
+			posts.map((x) => (
+				<a href={`${baseUrl}${x.slug?.current}`}>{x.title}</a>
+			))
+		}
+	</div>
+</Layout>
 
 <style>
 	h1 {
 		text-align: center;
 		font-size: 100px;
-	}
-	.post-list-container {
-		margin: 10px 20% 0 20%;
-		padding: 20px 20px 20px 20px;
-		border: solid 2px lightgray;
-		box-shadow: 0px 3px 4px lightgray;
-		height: 100vh;
 	}
 </style>
