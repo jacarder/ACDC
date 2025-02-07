@@ -6,7 +6,7 @@ import Layout from "../../layouts/Layout.astro";
 import PostAuthor from "../../components/PostAuthor.astro";
 
 const { data: posts } = await loadQuery<Post[]>({
-	query: `*[_type == "post"]{
+	query: `*[_type == "post"] | order(_createdAt desc){
 		title,
 		slug,
 		author,
@@ -21,20 +21,18 @@ const baseUrl = `http://localhost:4321/news/`;
 	<h1>News from our front</h1>
 	{
 		posts.map((x) => (
-			<div>
-				<a
-					class="text-3xl w-full inline-block"
-					href={`${baseUrl}${x.slug?.current}`}
-				>
-					{x.title}
-					<div class="ms-2 text-sm">
-						<PostAuthor
-							authorRef={x.author?._ref}
-							authoredDate={x._createdAt}
-						/>
-					</div>
-				</a>
-			</div>
+			<a
+				class="text-3xl w-full inline-block mb-4"
+				href={`${baseUrl}${x.slug?.current}`}
+			>
+				{x.title}
+				<div class="ms-2 text-sm">
+					<PostAuthor
+						authorRef={x.author?._ref}
+						authoredDate={x._createdAt}
+					/>
+				</div>
+			</a>
 		))
 	}
 </Layout>
