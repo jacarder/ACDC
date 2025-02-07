@@ -1,6 +1,13 @@
 ---
 import { PortableText as PortableTextInternal } from "astro-portabletext";
+import BlockQuote from "./sanity/BlockQuote.astro";
 const { portableText } = Astro.props;
+
+const components = {
+	block: {
+		blockquote: BlockQuote,
+	},
+};
 ---
 
-<PortableTextInternal value={portableText} />
+<PortableTextInternal value={portableText} components={components} />

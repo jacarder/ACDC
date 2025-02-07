@@ -2,3 +2,6 @@
 body {
 	font-family: Helvetica !important;
 }
+p {
+	margin: 16px 0 16px 0;
+}
