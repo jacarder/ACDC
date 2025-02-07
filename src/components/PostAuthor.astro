@@ -5,6 +5,8 @@ import { loadQuery } from "../shared/load-query";
 
 const { authorRef, authoredDate } = Astro.props;
 
+const formattedDate = new Date(authoredDate).toDateString();
+
 const params = { authorRef };
 
 const { data: author } = await loadQuery<Author>({
@@ -14,5 +16,5 @@ const { data: author } = await loadQuery<Author>({
 ---
 
 <div>
-	Posted by {author.name} on {authoredDate}
+	Posted by {author.name} on {formattedDate}
 </div>
