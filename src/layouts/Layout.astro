@@ -18,20 +18,24 @@ import "@/styles/global.css";
       class="navbar-container w-screen fixed top-0 z-1 bg-white border-blue-900"
     >
       <Navbar client:idle />
-      <div class="flex justify-between">
-        <address>100 Street Address, New Town, PA 11111</address>
+      <div class="flex flex-wrap justify-between sm:flex-nowrap">
+        <address class="w-[100%] sm:w-auto">
+          100 Street Address, New Town, PA 11111
+        </address>
         <a href="tel:8817884658" class="me-5">881-788-4658</a>
       </div>
     </div>
-    <div class="mx-8 pt-[5%]">
+    <div class="mx-8 pt-[100px] sm:pt-[70px]">
       <div class="shadow-md mx-[10%] p-5">
         <slot />
       </div>
     </div>
-    <div class="h-screen fixed w-[10%] top-[60px]">
+    <div class="h-screen fixed w-[10%] top-[85px] sm:top-[60px]">
       <FlagSVG />
     </div>
-    <div class="h-screen fixed w-[10%] top-[60px] right-0 scale-x-[-1]">
+    <div
+      class="h-screen fixed w-[10%] top-[85px] sm:top-[60px] right-0 scale-x-[-1]"
+    >
       <FlagSVG />
     </div>
   </body>
