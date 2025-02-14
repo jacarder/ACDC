@@ -2,6 +2,9 @@
 import { Navbar } from "@/components/islands/navbar";
 import FlagSVG from "../components/FlagSVG.astro";
 import "@/styles/global.css";
+import { NavBreadcrumbs } from "@/components/islands/navbreadcrumbs";
+
+const { showCrumbs } = Astro.props;
 ---
 
 <!doctype html>
@@ -26,6 +29,13 @@ import "@/styles/global.css";
       </div>
     </div>
     <div class="mx-8 pt-[100px] sm:pt-[70px]">
+      {
+        showCrumbs ? (
+          <div class="mx-[10%] p-5">
+            <NavBreadcrumbs currentPath={Astro.url.pathname} />
+          </div>
+        ) : null
+      }
       <div class="shadow-md mx-[10%] p-5">
         <slot />
       </div>

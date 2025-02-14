@@ -7,6 +7,7 @@ import PortableText from "../../components/PortableText.astro";
 import PostAuthor from "../../components/PostAuthor.astro";
 import buildImageUrl from "../../shared/build-image-url";
 import Layout from "../../layouts/Layout.astro";
+import { NavBreadcrumbs } from "@/components/islands/navbreadcrumbs";
 
 export async function getStaticPaths() {
 	const { data: posts } = await loadQuery<SanityDocument[]>({
@@ -30,7 +31,7 @@ const { data: post } = await loadQuery<Post>({
 });
 ---
 
-<Layout>
+<Layout showCrumbs>
 	<h1>{post.title}</h1>
 	<img src={buildImageUrl(post.mainImage).url()} alt="Article image" />
 	<PostAuthor authorRef={post.author?._ref} authoredDate={post._createdAt} />
