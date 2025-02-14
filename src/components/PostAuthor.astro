@@ -2,6 +2,7 @@
 import { type QueryParams } from "sanity";
 import type { Author } from "../../studio/sanity.types";
 import { loadQuery } from "../shared/load-query";
+import { UserAvatar } from "./islands/userAvatar";
 
 const { authorRef, authoredDate } = Astro.props;
 
@@ -15,6 +16,7 @@ const { data: author } = await loadQuery<Author>({
 });
 ---
 
-<div>
+<div class="flex flex-nowrap items-center gap-2">
+	<UserAvatar author={author} />
 	Posted by {author.name} on {formattedDate}
 </div>

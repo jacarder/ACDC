@@ -32,8 +32,8 @@ export function NavBreadcrumbs({ currentPath }: { currentPath: string }) {
 				{breadcrumbs.map((o, i, a) => (
 					<>
 						<BreadcrumbItem key={i}>
-							<BreadcrumbLink>
-								<a className="capitalize" href={o.href}>{o.anchor}</a>
+							<BreadcrumbLink key={i}>
+								<a key={i} className="capitalize" href={o.href}>{o.anchor}</a>
 							</BreadcrumbLink>
 						</BreadcrumbItem>
 						{
